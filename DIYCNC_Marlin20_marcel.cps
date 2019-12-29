@@ -12,7 +12,7 @@ properties = {
   jobTravelSpeedXY: 2500,              // High speed for travel movements X & Y (mm/min)
   jobTravelSpeedZ: 300,                // High speed for travel movements Z (mm/min)
 
-  jobManualSpindlePowerControl: true,   // Spindle motor is controlled by manual switch
+  jobManualSpindlePowerControl: true,   // Spindle motor is controlled by manual switch 
 
   jobUseArcs: true,                    // Produce G2/G3 for arcs
 
@@ -22,7 +22,7 @@ properties = {
   jobSequenceNumbers: false,           // show sequence numbers
   jobSequenceNumberStart: 10,          // first sequence number
   jobSequenceNumberIncrement: 1,       // increment for sequence numbers
-  jobSeparateWordsWithSpace: true,     // specifies that the words should be separated with a white space
+  jobSeparateWordsWithSpace: true,     // specifies that the words should be separated with a white space  
 
   toolChangeEnabled: true,          // Enable tool change code (bultin tool change requires LCD display)
   toolChangeX: 0,                   // X position for builtin tool change
@@ -33,9 +33,9 @@ properties = {
 
   probeOnStart: true,               // Execute probe gcode to align tool
   probeThickness: 0.8,              // plate thickness
-  probeUseHomeZ: true,              // use G28 or G38 for probing
-  probeG38Target: -10,              // probing up to pos
-  probeG38Speed: 30,                // probing with speed
+  probeUseHomeZ: true,              // use G28 or G38 for probing 
+  probeG38Target: -10,              // probing up to pos 
+  probeG38Speed: 30,                // probing with speed 
 
   gcodeStartFile: "",               // File with custom Gcode for header/start (in nc folder)
   gcodeStopFile: "",                // File with custom Gcode for footer/end (in nc folder)
@@ -46,14 +46,14 @@ properties = {
   cutterOnThrough: 80,              // Persent of power to turn on the laser/plasma cutter in through mode
   cutterOnEtch: 40,                 // Persent of power to turn on the laser/plasma cutter in etch mode
 
-  coolantA_Mode: 0, // Enable issuing g-codes for control Coolant channel A
-  coolantB_Mode: 0, // Use issuing g-codes for control Coolant channel B
+  coolantA_Mode: 0, // Enable issuing g-codes for control Coolant channel A 
+  coolantB_Mode: 0, // Use issuing g-codes for control Coolant channel B  
 
   commentWriteTools: true,
   commentActivities: true,
   commentSections: true,
   commentCommands: true,
-  commentMovements: true
+  commentMovements: true,
 };
 
 propertyDefinitions = {
@@ -63,7 +63,7 @@ propertyDefinitions = {
     values: [
       { title: "Marlin 2.0/Repetier 1.0.3", id: 0 },
       { title: "GRBL 1.1", id: 1 },
-      { title: "RepRap firmware (Duet)", id: 2 }
+      { title: "RepRap firmware (Duet)", id: 2 },
     ]
   },
 
@@ -188,44 +188,19 @@ propertyDefinitions = {
     values: [
       { title: "M106 S{PWM}/M107", id: 106 },
       { title: "M3 O{PWM}/M5", id: 3 },
-      { title: "M42 P{pin} S{PWM}", id: 42 }
+      { title: "M42 P{pin} S{PWM}", id: 42 },
     ]
   },
   cutterMarlinPin: {
     title: "Laser: Marlin M42 pin", description: "Marlin custom pin number for the laser/plasma cutter", group: 4,
     type: "integer", default_mm: 4, default_in: 4
   },
-  spindleMarlinMode: {
-    title: "CNC Router: Spindle mode",
-    description: "Marlin mode of the CNC Router",
-    group: 4,
-    type: "integer",
-    default_mm: 106,
-    default_in: 106,
-    values: [{
-        title: "M106 P{pin}/M107",
-        id: 106
-      },
-      {
-        title: "M3 O{PWM}/M5",
-        id: 3
-      }
-    ]
-  },
-  spindleMarlinPin: {
-    title: "CNC Router: Marlin FAN pin",
-    description: "Marlin FAN pin used to control spindle",
-    group: 4,
-    type: "integer",
-    default_mm: 0,
-    default_in: 0
-  },
   cutterGrblMode: {
     title: "Laser: GRBL mode", description: "GRBL mode of the laser/plasma cutter", group: 4,
     type: "integer", default_mm: 4, default_in: 4,
     values: [
       { title: "M4 S{PWM}/M5 dynamic power", id: 4 },
-      { title: "M3 S{PWM}/M5 static power", id: 3 }
+      { title: "M3 S{PWM}/M5 static power", id: 3 },
     ]
   },
 
@@ -266,7 +241,7 @@ propertyDefinitions = {
     title: "Coolant: A Off command", description: "Gcode command to turn off Coolant A", group: 6, type: "string",
     default_mm: "M42 P11 S0", default_in: "M42 P11 S0"
   },
-
+  
   coolantB_Mode: {
     title: "Coolant: B Mode", description: "Enable issuing g-codes for control Coolant channel B", group: 6, type: "integer",
     default_mm: 0, default_in: 0,
@@ -310,7 +285,7 @@ propertyDefinitions = {
   commentMovements: {
     title: "Comment: Trace Movements", description: "Write stringified movements called by CAM", group: 7,
     type: "boolean", default_mm: true, default_in: true
-  }
+  },
 
 };
 
@@ -543,7 +518,7 @@ function onCircular(clockwise, cx, cy, cz, x, y, z, feed) {
     error(localize("Radius compensation cannot be activated/deactivated for a circular move."));
     return;
   }
-  currentFirmware.circular(clockwise, cx, cy, cz, x, y, z, feed)
+  currentFirmware.circular(clockwise, cx, cy, cz, x, y, z, feed)  
 }
 
 // Called on waterjet/plasma/laser cuts
@@ -733,7 +708,7 @@ function writeFirstSection() {
       pair.max = rmax;
     }
   }
-
+  
   var numberOfSections = getNumberOfSections();
   for (var i = 0; i < numberOfSections; ++i) {
     var section = getSection(i);
@@ -831,7 +806,7 @@ function linearMovements(_x, _y, _z, _feed) {
     // ensure that we end at desired position when compensation is turned off
     xOutput.reset();
     yOutput.reset();
-  }
+  }  
   var x = xOutput.format(_x);
   var y = yOutput.format(_y);
   var z = zOutput.format(_z);
@@ -842,7 +817,7 @@ function linearMovements(_x, _y, _z, _feed) {
       return;
     } else {
       writeBlock(gMotionModal.format(1), x, y, z, f);
-    }
+    }    
   } else if (f) {
     if (getNextRecord().isMotion()) { // try not to output feed without motion
       fOutput.reset(); // force feed on next line
@@ -871,7 +846,7 @@ function loadFile(_file) {
 
 var currentCoolantMode = 0;
 
-// Manage coolant state
+// Manage coolant state 
 function setCoolant(coolant) {
   if (currentCoolantMode == coolant) {
     return;
@@ -909,9 +884,9 @@ function writeActivityComment(_comment) {
 
 function mergeProperties(to, from)
 {
-  for (var attrname in from) {
-    to[attrname] = from[attrname];
-  }
+  for (var attrname in from) { 
+    to[attrname] = from[attrname]; 
+  }   
 }
 
 function Firmware3dPrinterLike() {
@@ -955,18 +930,8 @@ Firmware3dPrinterLike.prototype.spindleOn = function (_spindleSpeed, _clockwise)
       this.askUser("Turn ON " + speedFormat.format(_spindleSpeed) + "RPM", "Spindle", false);
     }
   } else {
-    switch (properties.spindleMarlinMode) {
-      case 106:
-        writeActivityComment(" >>> Spindle Speed " + speedFormat.format(_spindleSpeed));
-        writeBlock(mFormat.format(106), pFormat.format(properties.spindleMarlinPin));
-        break;
-      case 3:
-        writeActivityComment(" >>> Spindle Speed " + speedFormat.format(_spindleSpeed));
-        writeBlock(mFormat.format(_clockwise ? 3 : 4), sOutput.format(_spindleSpeed));
-        break;
-    }
-    //writeActivityComment(" >>> Spindle Speed " + speedFormat.format(_spindleSpeed));
-    //writeBlock(mFormat.format(_clockwise ? 3 : 4), sOutput.format(spindleSpeed));
+    writeActivityComment(" >>> Spindle Speed " + speedFormat.format(_spindleSpeed));
+    writeBlock(mFormat.format(_clockwise ? 3 : 4), sOutput.format(spindleSpeed));
   }
   this.spindleEnabled = true;
 }
@@ -975,15 +940,7 @@ Firmware3dPrinterLike.prototype.spindleOff = function () {
     writeBlock(mFormat.format(300), sFormat.format(300), pFormat.format(3000));
     this.askUser("Turn OFF spindle", "Spindle", false);
   } else {
-    switch (properties.spindleMarlinMode) {
-      case 106:
-        writeBlock(mFormat.format(107), pFormat.format(properties.spindleMarlinPin));
-        break;
-      case 3:
-        writeBlock(mFormat.format(5));
-        break;
-    }
-    //writeBlock(mFormat.format(5));
+    writeBlock(mFormat.format(5));
   }
   this.spindleEnabled = false;
 }
@@ -1109,9 +1066,6 @@ properties3dPrinter = {
   cutterMarlinMode: 106,              // Marlin mode laser/plasma cutter
   cutterMarlinPin: 4,               // Marlin laser/plasma cutter pin for M42
 
-  spindleMarlinMode: 106,
-  spindleMarlinPin: 0,
-
   coolantAMarlinOn: "M42 P11 S255",        // GCode command to turn on Coolant channel A
   coolantAMarlinOff: "M42 P11 S0",         // Gcode command to turn off Coolant channel A
   coolantBMarlinOn: "M42 P6 S255",         // GCode command to turn on Coolant channel B
@@ -1129,32 +1083,12 @@ propertyDefinitions3dPrinter = {
     values: [
       { title: "M106 S{PWM}/M107", id: 106 },
       { title: "M3 O{PWM}/M5", id: 3 },
-      { title: "M42 P{pin} S{PWM}", id: 42 }
+      { title: "M42 P{pin} S{PWM}", id: 42 },
     ]
   },
   cutterMarlinPin: {
     title: "Laser: Marlin M42 pin", description: "Marlin custom pin number for the laser/plasma cutter", group: 4,
     type: "integer", default_mm: 4, default_in: 4
-  },
-  spindleMarlinMode: {
-    title: "CNC Router: Spindle mode",
-    description: "Marlin mode of the CNC Router",
-    group: 4,
-    type: "integer",
-    default_mm: 106,
-    default_in: 106,
-    values: [
-      { title: "M106 P{pin}/M107", id: 106 },
-      { title: "M3 O{PWM}/M5", id: 3 }
-    ]
-  },
-  spindleMarlinPin: {
-    title: "CNC Router: Marlin FAN pin",
-    description: "Marlin FAN pin used to control spindle",
-    group: 4,
-    type: "integer",
-    default_mm: 0,
-    default_in: 0
   },
 
   coolantAMarlinOn: { title: "Coolant: A On command", description: "GCode command to turn on Coolant channel A", group: 6, type: "string", default_mm: "M42 P11 S255" },
@@ -1162,7 +1096,7 @@ propertyDefinitions3dPrinter = {
     title: "Coolant: A Off command", description: "Gcode command to turn off Coolant A", group: 6, type: "string",
     default_mm: "M42 P11 S0", default_in: "M42 P11 S0"
   },
-
+  
   coolantBMarlinOn: {
     title: "Coolant: B On command", description: "GCode command to turn on Coolant channel B", group: 6, type: "string",
     default_mm: "M42 P6 S255", default_in: "M42 P6 S255"
@@ -1172,3 +1106,16 @@ propertyDefinitions3dPrinter = {
     default_mm: "M42 P6 S0", default_in: "M42 P6 S0"
   },
 };
+
+description = "DIYCNC Milling/Laser - Marlin 2.0";
+
+mergeProperties(properties, properties3dPrinter);
+mergeProperties(propertyDefinitions, propertyDefinitions3dPrinter);
+
+function FirmwareMarlin20() {
+    Firmware3dPrinterLike.apply(this, arguments);
+}
+FirmwareMarlin20.prototype = Object.create(Firmware3dPrinterLike.prototype);
+FirmwareMarlin20.prototype.constructor = FirmwareMarlin20;
+
+currentFirmware = new FirmwareMarlin20();
