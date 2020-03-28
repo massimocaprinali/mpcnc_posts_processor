@@ -36,6 +36,7 @@ properties = {
   probeUseHomeZ: true,              // use G28 or G38 for probing
   probeG38Target: -10,              // probing up to pos
   probeG38Speed: 30,                // probing with speed
+  autoBedLevelOnStart: false,           // Execute auto bed level with G29 command
 
   gcodeStartFile: "",               // File with custom Gcode for header/start (in nc folder)
   gcodeStopFile: "",                // File with custom Gcode for footer/end (in nc folder)
@@ -168,6 +169,10 @@ propertyDefinitions = {
   probeG38Speed: {
     title: "Probe: G38 speed", description: "Probing with speed (mm/min; in/min)", group: 3,
     type: "spatial", default_mm: 30, default_in: 1.2
+  },
+  autoBedLevelOnStart: {
+    title: "Auto Bed Leveling: On job start", description: "Execute auto bed level with G29 command", group: 3,
+    type: "boolean", default_mm: false, default_in: false
   },
 
   cutterOnVaporize: {
@@ -710,6 +715,9 @@ function onCommand(command) {
         return;
       currentFirmware.probeTool();
       return;
+    case COMMAND_ABL:
+      currentFirmware.autoBedLevel();
+      return;
   }
 }
 
@@ -936,6 +944,9 @@ Firmware3dPrinterLike.prototype.start = function () {
   if (properties.probeOnStart && tool.number != 0 && !tool.jetTool) {
     onCommand(COMMAND_TOOL_MEASURE);
   }
+  if (properties.autoBedLevelOnStart && tool.number != 0 && !tool.jetTool) {
+    onCommand(COMMAND_ABL);
+  }
 }
 Firmware3dPrinterLike.prototype.end = function () {
   this.display_text("Job end");
@@ -1099,6 +1110,21 @@ Firmware3dPrinterLike.prototype.probeTool = function () {
   if (properties.toolChangeZ != "") { // move up tool to safe height again after probing
     rapidMovementsZ(propertyMmToUnit(properties.toolChangeZ));
   }
+  this.flushMotions();
+  this.askUser("Detach ZProbe", "Probe", false);
+}
+
+Firmware3dPrinterLike.prototype.autoBedLevel = function () {
+  this.askUser("Attach ZProbe", "Probe", false);
+  // refer http://marlinfw.org/docs/gcode/G029.html
+  writeBlock(gFormat.format(28), 'Z');
+  writeBlock(gFormat.format(92), zFormat.format(propertyMmToUnit(properties.probeThickness))); // Set origin to initial position
+  resetAll();
+  if (properties.toolChangeZ != "") { // move up tool to safe height again after probing
+    rapidMovementsZ(propertyMmToUnit(properties.toolChangeZ));
+  }
+  this.flushMotions();
+  writeBlock(gFormat.format(29), 'L' + ranges.x.min, 'R'+ ranges.x.max, 'F'+ranges.y.min, 'B'+ranges.y.max, 'S3000');
   this.flushMotions();
   this.askUser("Detach ZProbe", "Probe", false);
 }
