@@ -966,18 +966,13 @@ Firmware3dPrinterLike.prototype.spindleOn = function (_spindleSpeed, _clockwise)
       this.askUser("Turn ON " + speedFormat.format(_spindleSpeed) + "RPM", "Spindle", false);
     }
   } else {
-    switch (properties.spindleMarlinMode) {
-      case 106:
-        writeActivityComment(" >>> Spindle Speed " + speedFormat.format(_spindleSpeed));
-        writeBlock(mFormat.format(106), pFormat.format(properties.spindleMarlinPin));
-        break;
-      case 3:
-        writeActivityComment(" >>> Spindle Speed " + speedFormat.format(_spindleSpeed));
-        writeBlock(mFormat.format(_clockwise ? 3 : 4), sOutput.format(_spindleSpeed));
-        break;
+    if(properties.spindleMarlinMode == 106) {
+      writeActivityComment(" >>> Spindle Speed " + speedFormat.format(_spindleSpeed));
+      writeBlock(mFormat.format(106), pFormat.format(properties.spindleMarlinPin));
+    } else if(properties.spindleMarlinMode == 3) {
+      writeActivityComment(" >>> Spindle Speed " + speedFormat.format(_spindleSpeed));
+      writeBlock(mFormat.format(_clockwise ? 3 : 4), sOutput.format(_spindleSpeed));
     }
-    //writeActivityComment(" >>> Spindle Speed " + speedFormat.format(_spindleSpeed));
-    //writeBlock(mFormat.format(_clockwise ? 3 : 4), sOutput.format(spindleSpeed));
   }
   this.spindleEnabled = true;
 }
@@ -986,43 +981,32 @@ Firmware3dPrinterLike.prototype.spindleOff = function () {
     writeBlock(mFormat.format(300), sFormat.format(300), pFormat.format(3000));
     this.askUser("Turn OFF spindle", "Spindle", false);
   } else {
-    switch (properties.spindleMarlinMode) {
-      case 106:
-        writeBlock(mFormat.format(107), pFormat.format(properties.spindleMarlinPin));
-        break;
-      case 3:
-        writeBlock(mFormat.format(5));
-        break;
+    if (properties.spindleMarlinMode == 106) {
+      writeBlock(mFormat.format(107), pFormat.format(properties.spindleMarlinPin));
+    } else if (properties.spindleMarlinMode == 3) {
+      writeBlock(mFormat.format(5));
     }
-    //writeBlock(mFormat.format(5));
   }
   this.spindleEnabled = false;
 }
 Firmware3dPrinterLike.prototype.laserOn = function (power) {
   var laser_pwm = power / 100 * 255;
-  switch (properties.cutterMarlinMode) {
-    case 106:
-      writeBlock(mFormat.format(106), sFormat.format(laser_pwm));
-      break;
-    case 3:
-      writeBlock(mFormat.format(3), oFormat.format(laser_pwm));
-      break;
-    case 42:
-      writeBlock(mFormat.format(42), pFormat.format(properties.cutterMarlinPin), sFormat.format(laser_pwm));
-      break;
+
+  if (properties.cutterMarlinMode == 106) {
+    writeBlock(mFormat.format(106), sFormat.format(laser_pwm));
+  } else if (properties.cutterMarlinMode == 3) {
+    writeBlock(mFormat.format(3), oFormat.format(laser_pwm));
+  } else if (properties.cutterMarlinMode == 42) {
+    writeBlock(mFormat.format(42), pFormat.format(properties.cutterMarlinPin), sFormat.format(laser_pwm));
   }
 }
 Firmware3dPrinterLike.prototype.laserOff = function () {
-  switch (properties.cutterMarlinMode) {
-    case 106:
-      writeBlock(mFormat.format(107));
-      break;
-    case 3:
-      writeBlock(mFormat.format(5));
-      break;
-    case 42:
-      writeBlock(mFormat.format(42), pFormat.format(properties.cutterMarlinPin), sFormat.format(0));
-      break;
+  if (properties.cutterMarlinMode == 106) {
+    writeBlock(mFormat.format(107));
+  } else if (properties.cutterMarlinMode == 3) {
+    writeBlock(mFormat.format(5));
+  } else if (properties.cutterMarlinMode == 42) {
+    writeBlock(mFormat.format(42), pFormat.format(properties.cutterMarlinPin), sFormat.format(0));
   }
 }
 Firmware3dPrinterLike.prototype.coolantA = function (on) {
@@ -1049,20 +1033,17 @@ Firmware3dPrinterLike.prototype.circular = function (clockwise, cx, cy, cz, x, y
       linearize(tolerance);
       return;
     }
-    switch (getCircularPlane()) {
-      case PLANE_XY:
-        writeBlock(gMotionModal.format(clockwise ? 2 : 3), xOutput.format(x), iOutput.format(cx - start.x, 0), jOutput.format(cy - start.y, 0), fOutput.format(feed));
-        break;
-      default:
-        linearize(tolerance);
+
+    if (getCircularPlane() == PLANE_XY) {
+      writeBlock(gMotionModal.format(clockwise ? 2 : 3), xOutput.format(x), iOutput.format(cx - start.x, 0), jOutput.format(cy - start.y, 0), fOutput.format(feed));
+    } else {
+      linearize(tolerance);
     }
   } else {
-    switch (getCircularPlane()) {
-      case PLANE_XY:
-        writeBlock(gMotionModal.format(clockwise ? 2 : 3), xOutput.format(x), yOutput.format(y), zOutput.format(z), iOutput.format(cx - start.x, 0), jOutput.format(cy - start.y, 0), fOutput.format(feed));
-        break;
-      default:
-        linearize(tolerance);
+    if (getCircularPlane() == PLANE_XY) {
+      writeBlock(gMotionModal.format(clockwise ? 2 : 3), xOutput.format(x), yOutput.format(y), zOutput.format(z), iOutput.format(cx - start.x, 0), jOutput.format(cy - start.y, 0), fOutput.format(feed));
+    } else {
+      linearize(tolerance);
     }
   }
 }
