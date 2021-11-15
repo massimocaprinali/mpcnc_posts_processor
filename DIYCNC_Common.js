@@ -530,6 +530,8 @@ var sequenceNumber;
 var gFormat = createFormat({ prefix: "G", decimals: 1 });
 var mFormat = createFormat({ prefix: "M", decimals: 0 });
 
+var dimFormat = createFormat({ suffix: " mm", decimals: unit == MM ? 3 : 4 });
+
 var xyzFormat = createFormat({ decimals: unit == MM ? 3 : 4 });
 var xFormat = createFormat({ prefix: "X", decimals: unit == MM ? 3 : 4 });
 var yFormat = createFormat({ prefix: "Y", decimals: unit == MM ? 3 : 4 });
@@ -1057,6 +1059,17 @@ function writeFirstSection() {
       " Size=" +
       xyzFormat.format(ranges.z.max - ranges.z.min)
   );
+
+  var workpiece = getWorkpiece();
+  var stockX = (workpiece.upper.x - workpiece.lower.x);
+  var stockY = (workpiece.upper.y - workpiece.lower.y);
+  var stockZ = (workpiece.upper.z - workpiece.lower.z);
+
+  writeComment(" ");
+  writeComment(" Stock dimension:");
+  writeComment(" Stock X= " + dimFormat.format(stockX));
+  writeComment(" Stock Y= " + dimFormat.format(stockY));
+  writeComment(" Stock Z= " + dimFormat.format(stockZ));
 
   if (properties.commentWriteTools) {
     writeComment(" ");
