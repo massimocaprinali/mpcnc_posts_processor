@@ -11,12 +11,12 @@ properties = {
   jobTravelSpeedXY: 2500, // High speed for travel movements X & Y (mm/min)
   jobTravelSpeedZ: 300, // High speed for travel movements Z (mm/min)
 
-  jobManualSpindlePowerControl: true, // Spindle motor is controlled by manual switch
+  jobManualSpindlePowerControl: false, // Spindle motor is controlled by manual switch
 
   jobUseArcs: true, // Produce G2/G3 for arcs
 
-  jobSetOriginOnStart: true, // Set origin when gcode start (G92)
-  jobGoOriginOnFinish: true, // Go X0 Y0 Z0 at gcode end
+  jobSetOriginOnStart: false, // Set origin when gcode start (G92)
+  jobGoOriginOnFinish: false, // Go X0 Y0 Z0 at gcode end
 
   jobSequenceNumbers: false, // show sequence numbers
   jobSequenceNumberStart: 10, // first sequence number
@@ -30,7 +30,7 @@ properties = {
   toolChangeZProbe: true, // Z probe after tool change
   toolChangeDisableZStepper: false, // disable Z stepper when change a tool
 
-  probeOnStart: true, // Execute probe gcode to align tool
+  probeOnStart: false, // Execute probe gcode to align tool
   probeThickness: 0.8, // plate thickness
   probeUseHomeZ: true, // use G28 or G38 for probing
   probeG38Target: -10, // probing up to pos
