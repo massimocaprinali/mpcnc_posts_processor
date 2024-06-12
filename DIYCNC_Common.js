@@ -56,57 +56,11 @@ properties = {
   commentMovements: true,
 };
 
-// define the custom property groups
-groupDefinitions = {
-  job: {
-    title: "Job",
-    description: "Job options",
-    collapsed: false,
-    order: 10,
-  },
-  toolChange: {
-    title: "Tool Change",
-    description: "Tool Change options",
-    collapsed: true,
-    order: 20,
-  },
-  probing: {
-    title: "Probing",
-    description: "Probing options",
-    collapsed: true,
-    order: 30,
-  },
-  laserSpindle: {
-    title: "Laser/Spindle",
-    description: "Laser/Spindle options",
-    collapsed: true,
-    order: 40,
-  },
-  extern: {
-    title: "Extern",
-    description: "Extern options",
-    collapsed: true,
-    order: 50,
-  },
-  coolant: {
-    title: "Coolant",
-    description: "Coolant options",
-    collapsed: true,
-    order: 60,
-  },
-  comments: {
-    title: "Comments",
-    description: "Comments options",
-    collapsed: true,
-    order: 70,
-  },
-};
-
 propertyDefinitions = {
   jobFirmware: {
     title: "Job: Firmware",
     description: "GCode output mode",
-    group: laserSpindle,
+    group: 4,
     type: "integer",
     default_mm: 0,
     default_in: 0,
@@ -120,7 +74,7 @@ propertyDefinitions = {
   jobTravelSpeedXY: {
     title: "Job: Travel speed X/Y",
     description: "High speed for travel movements X & Y (mm/min; in/min)",
-    group: job,
+    group: 1,
     type: "spatial",
     default_mm: 2500,
     default_in: 100,
@@ -128,7 +82,7 @@ propertyDefinitions = {
   jobTravelSpeedZ: {
     title: "Job: Travel Speed Z",
     description: "High speed for travel movements z (mm/min; in/min)",
-    group: job,
+    group: 1,
     type: "spatial",
     default_mm: 300,
     default_in: 12,
@@ -138,7 +92,7 @@ propertyDefinitions = {
     title: "Job: Manual Spindle On/Off",
     description:
       "Set Yes when your spindle motor is controlled by manual switch",
-    group: job,
+    group: 1,
     type: "boolean",
     default_mm: true,
     default_in: true,
@@ -146,7 +100,7 @@ propertyDefinitions = {
   jobUseArcs: {
     title: "Job: Use Arcs",
     description: "Use G2/G3 g-codes fo circular movements",
-    group: job,
+    group: 1,
     type: "boolean",
     default_mm: true,
     default_in: true,
@@ -155,7 +109,7 @@ propertyDefinitions = {
   jobMarlinEnforceFeedrate: {
     title: "Job: Marlin: Enforce Feedrate",
     description: "Add feedrate to each movement g-code",
-    group: job,
+    group: 1,
     type: "boolean",
     default_mm: false,
     default_in: false,
@@ -164,7 +118,7 @@ propertyDefinitions = {
   jobSetOriginOnStart: {
     title: "Job: Reset on start (G92)",
     description: "Set origin when gcode start (G92)",
-    group: job,
+    group: 1,
     type: "boolean",
     default_mm: true,
     default_in: true,
@@ -172,7 +126,7 @@ propertyDefinitions = {
   jobGoOriginOnFinish: {
     title: "Job: Goto 0 at end",
     description: "Go X0 Y0 at gcode end",
-    group: job,
+    group: 1,
     type: "boolean",
     default_mm: true,
     default_in: true,
@@ -181,7 +135,7 @@ propertyDefinitions = {
   jobSequenceNumbers: {
     title: "Job: Line numbers",
     description: "Show sequence numbers",
-    group: job,
+    group: 1,
     type: "boolean",
     default_mm: true,
     default_in: true,
@@ -189,7 +143,7 @@ propertyDefinitions = {
   jobSequenceNumberStart: {
     title: "Job: Line start",
     description: "First sequence number",
-    group: job,
+    group: 1,
     type: "integer",
     default_mm: 10,
     default_in: 10,
@@ -197,7 +151,7 @@ propertyDefinitions = {
   jobSequenceNumberIncrement: {
     title: "Job: Line increment",
     description: "Lncrement for sequence numbers",
-    group: job,
+    group: 1,
     type: "integer",
     default_mm: 1,
     default_in: 1,
@@ -206,7 +160,7 @@ propertyDefinitions = {
     title: "Job: Separate words",
     description:
       "Specifies that the words should be separated with a white space",
-    group: job,
+    group: 1,
     type: "boolean",
     default_mm: true,
     default_in: true,
@@ -214,7 +168,7 @@ propertyDefinitions = {
   jobDuetMillingMode: {
     title: "Job: Duet: Milling mode",
     description: "GCode command to setup Duet3d milling mode",
-    group: job,
+    group: 1,
     type: "string",
     default_mm: "M453 P2 I0 R30000 F200",
     default_in: "M453 P2 I0 R30000 F200",
@@ -222,7 +176,7 @@ propertyDefinitions = {
   jobDuetLaserMode: {
     title: "Job: Duet: Laser mode",
     description: "GCode command to setup Duet3d laser mode",
-    group: job,
+    group: 1,
     type: "string",
     default_mm: "M452 P2 I0 R255 F200",
     default_in: "M452 P2 I0 R255 F200",
@@ -232,7 +186,7 @@ propertyDefinitions = {
     title: "Change: Enabled",
     description:
       "Enable tool change code (bultin tool change requires LCD display)",
-    group: toolChange,
+    group: 2,
     type: "boolean",
     default_mm: true,
     default_in: true,
@@ -240,7 +194,7 @@ propertyDefinitions = {
   toolChangeX: {
     title: "Change: X",
     description: "X position for builtin tool change",
-    group: toolChange,
+    group: 2,
     type: "spatial",
     default_mm: 0,
     default_in: 0,
@@ -248,7 +202,7 @@ propertyDefinitions = {
   toolChangeY: {
     title: "Change: Y",
     description: "Y position for builtin tool change",
-    group: toolChange,
+    group: 2,
     type: "spatial",
     default_mm: 0,
     default_in: 0,
@@ -256,7 +210,7 @@ propertyDefinitions = {
   toolChangeZ: {
     title: "Change: Z ",
     description: "Z position for builtin tool change",
-    group: toolChange,
+    group: 2,
     type: "spatial",
     default_mm: 40,
     default_in: 1.6,
@@ -264,7 +218,7 @@ propertyDefinitions = {
   toolChangeZProbe: {
     title: "Change: Make Z Probe",
     description: "Z probe after tool change",
-    group: toolChange,
+    group: 2,
     type: "boolean",
     default_mm: true,
     default_in: true,
@@ -272,7 +226,7 @@ propertyDefinitions = {
   toolChangeDisableZStepper: {
     title: "Change: Disable Z stepper",
     description: "Disable Z stepper when change a tool",
-    group: toolChange,
+    group: 2,
     type: "boolean",
     default_mm: false,
     default_in: false,
@@ -281,7 +235,7 @@ propertyDefinitions = {
   probeOnStart: {
     title: "Probe: On job start",
     description: "Execute probe gcode on job start",
-    group: probing,
+    group: 3,
     type: "boolean",
     default_mm: true,
     default_in: true,
@@ -289,7 +243,7 @@ propertyDefinitions = {
   probeThickness: {
     title: "Probe: Plate thickness",
     description: "Plate thickness",
-    group: probing,
+    group: 3,
     type: "spatial",
     default_mm: 0.8,
     default_in: 0.032,
@@ -297,7 +251,7 @@ propertyDefinitions = {
   probeUseHomeZ: {
     title: "Probe: Use Home Z",
     description: "Use G28 or G38 for probing",
-    group: probing,
+    group: 3,
     type: "boolean",
     default_mm: true,
     default_in: true,
@@ -305,7 +259,7 @@ propertyDefinitions = {
   probeG38Target: {
     title: "Probe: G38 target",
     description: "Probing up to Z position",
-    group: probing,
+    group: 3,
     type: "spatial",
     default_mm: -10,
     default_in: -0.5,
@@ -313,7 +267,7 @@ propertyDefinitions = {
   probeG38Speed: {
     title: "Probe: G38 speed",
     description: "Probing with speed (mm/min; in/min)",
-    group: probing,
+    group: 3,
     type: "spatial",
     default_mm: 30,
     default_in: 1.2,
@@ -321,7 +275,7 @@ propertyDefinitions = {
   autoBedLevelOnStart: {
     title: "Auto Bed Leveling: On job start",
     description: "Execute auto bed level with G29 command",
-    group: probing,
+    group: 3,
     type: "boolean",
     default_mm: false,
     default_in: false,
@@ -331,7 +285,7 @@ propertyDefinitions = {
     title: "Laser: On - Vaporize",
     description:
       "Persent of power to turn on the laser/plasma cutter in vaporize mode",
-    group: laserSpindle,
+    group: 4,
     type: "number",
     default_mm: 100,
     default_in: 100,
@@ -340,7 +294,7 @@ propertyDefinitions = {
     title: "Laser: On - Through",
     description:
       "Persent of power to turn on the laser/plasma cutter in through mode",
-    group: laserSpindle,
+    group: 4,
     type: "number",
     default_mm: 80,
     default_in: 80,
@@ -348,7 +302,7 @@ propertyDefinitions = {
   cutterOnEtch: {
     title: "Laser: On - Etch",
     description: "Persent of power to on the laser/plasma cutter in etch mode",
-    group: laserSpindle,
+    group: 4,
     type: "number",
     default_mm: 40,
     default_in: 40,
@@ -356,7 +310,7 @@ propertyDefinitions = {
   cutterMarlinMode: {
     title: "Laser: Marlin/Reprap mode",
     description: "Marlin/Reprar mode of the laser/plasma cutter",
-    group: laserSpindle,
+    group: 4,
     type: "integer",
     default_mm: 106,
     default_in: 106,
@@ -369,7 +323,7 @@ propertyDefinitions = {
   cutterMarlinPin: {
     title: "Laser: Marlin M42 pin",
     description: "Marlin custom pin number for the laser/plasma cutter",
-    group: laserSpindle,
+    group: 4,
     type: "integer",
     default_mm: 4,
     default_in: 4,
@@ -377,7 +331,7 @@ propertyDefinitions = {
   spindleMarlinMode: {
     title: "CNC Router: Spindle mode",
     description: "Marlin mode of the CNC Router",
-    group: laserSpindle,
+    group: 4,
     type: "integer",
     default_mm: 106,
     default_in: 106,
@@ -390,7 +344,7 @@ propertyDefinitions = {
   spindleMarlinPin: {
     title: "CNC Router: Marlin FAN pin",
     description: "Marlin FAN pin used to control spindle",
-    group: laserSpindle,
+    group: 4,
     type: "integer",
     default_mm: 0,
     default_in: 0,
@@ -398,7 +352,7 @@ propertyDefinitions = {
   cutterGrblMode: {
     title: "Laser: GRBL mode",
     description: "GRBL mode of the laser/plasma cutter",
-    group: laserSpindle,
+    group: 4,
     type: "integer",
     default_mm: 4,
     default_in: 4,
@@ -411,7 +365,7 @@ propertyDefinitions = {
   gcodeStartFile: {
     title: "Extern: Start File",
     description: "File with custom Gcode for header/start (in nc folder)",
-    group: extern,
+    group: 5,
     type: "file",
     default_mm: "",
     default_in: "",
@@ -419,7 +373,7 @@ propertyDefinitions = {
   gcodeStopFile: {
     title: "Extern: Stop File",
     description: "File with custom Gcode for footer/end (in nc folder)",
-    group: extern,
+    group: 5,
     type: "file",
     default_mm: "",
     default_in: "",
@@ -427,7 +381,7 @@ propertyDefinitions = {
   gcodeToolFile: {
     title: "Extern: Tool File",
     description: "File with custom Gcode for tool change (in nc folder)",
-    group: extern,
+    group: 5,
     type: "file",
     default_mm: "",
     default_in: "",
@@ -435,7 +389,7 @@ propertyDefinitions = {
   gcodeProbeFile: {
     title: "Extern: Probe File",
     description: "File with custom Gcode for tool probe (in nc folder)",
-    group: extern,
+    group: 5,
     type: "file",
     default_mm: "",
     default_in: "",
@@ -444,7 +398,7 @@ propertyDefinitions = {
   coolantA_Mode: {
     title: "Coolant: A Mode",
     description: "Enable issuing g-codes for control Coolant channel A",
-    group: coolant,
+    group: 6,
     type: "integer",
     default_mm: 0,
     default_in: 0,
@@ -463,14 +417,14 @@ propertyDefinitions = {
   coolantAMarlinOn: {
     title: "Coolant: A On command",
     description: "GCode command to turn on Coolant channel A",
-    group: coolant,
+    group: 6,
     type: "string",
     default_mm: "M42 P11 S255",
   },
   coolantAMarlinOff: {
     title: "Coolant: A Off command",
     description: "Gcode command to turn off Coolant A",
-    group: coolant,
+    group: 6,
     type: "string",
     default_mm: "M42 P11 S0",
     default_in: "M42 P11 S0",
@@ -479,7 +433,7 @@ propertyDefinitions = {
   coolantB_Mode: {
     title: "Coolant: B Mode",
     description: "Enable issuing g-codes for control Coolant channel B",
-    group: coolant,
+    group: 6,
     type: "integer",
     default_mm: 0,
     default_in: 0,
@@ -498,7 +452,7 @@ propertyDefinitions = {
   coolantBMarlinOn: {
     title: "Coolant: B On command",
     description: "GCode command to turn on Coolant channel B",
-    group: coolant,
+    group: 6,
     type: "string",
     default_mm: "M42 P6 S255",
     default_in: "M42 P6 S255",
@@ -506,7 +460,7 @@ propertyDefinitions = {
   coolantBMarlinOff: {
     title: "Coolant: B Off command",
     description: "Gcode command to turn off Coolant channel B",
-    group: coolant,
+    group: 6,
     type: "string",
     default_mm: "M42 P6 S0",
     default_in: "M42 P6 S0",
@@ -515,7 +469,7 @@ propertyDefinitions = {
   commentWriteTools: {
     title: "Comment: Write Tools",
     description: "Write table of used tools in job header",
-    group: comments,
+    group: 7,
     type: "boolean",
     default_mm: true,
     default_in: true,
@@ -524,7 +478,7 @@ propertyDefinitions = {
     title: "Comment: Activities",
     description:
       "Write comments which somehow helps to understand current piece of g-code",
-    group: comments,
+    group: 7,
     type: "boolean",
     default_mm: true,
     default_in: true,
@@ -532,7 +486,7 @@ propertyDefinitions = {
   commentSections: {
     title: "Comment: Sections",
     description: "Write header of every section",
-    group: comments,
+    group: 7,
     type: "boolean",
     default_mm: true,
     default_in: true,
@@ -540,7 +494,7 @@ propertyDefinitions = {
   commentCommands: {
     title: "Comment: Trace Commands",
     description: "Write stringified commands called by CAM",
-    group: comments,
+    group: 7,
     type: "boolean",
     default_mm: true,
     default_in: true,
@@ -548,7 +502,7 @@ propertyDefinitions = {
   commentMovements: {
     title: "Comment: Trace Movements",
     description: "Write stringified movements called by CAM",
-    group: comments,
+    group: 7,
     type: "boolean",
     default_mm: true,
     default_in: true,
@@ -612,7 +566,7 @@ var kOutput = createReferenceVariable({}, kFormat);
 var gMotionModal = createModal({}, gFormat); // modal group 1 // G0-G3, ...
 var gPlaneModal = createModal(
   {
-    onchange: function() {
+    onchange: function () {
       gMotionModal.reset();
     },
   },
@@ -647,7 +601,7 @@ function FirmwareBase() {
   this.machineMode = undefined; //TYPE_MILLING, TYPE_JET
 }
 
-FirmwareBase.prototype.section = function() {
+FirmwareBase.prototype.section = function () {
   this.machineMode = currentSection.type;
 };
 
@@ -1044,7 +998,7 @@ function writeFirstSection() {
     y: { min: undefined, max: undefined },
     z: { min: undefined, max: undefined },
   };
-  var handleMinMax = function(pair, range) {
+  var handleMinMax = function (pair, range) {
     var rmin = range.getMinimum();
     var rmax = range.getMaximum();
     if (pair.min == undefined || pair.min > rmin) {
@@ -1102,9 +1056,9 @@ function writeFirstSection() {
   );
 
   var workpiece = getWorkpiece();
-  var stockX = workpiece.upper.x - workpiece.lower.x;
-  var stockY = workpiece.upper.y - workpiece.lower.y;
-  var stockZ = workpiece.upper.z - workpiece.lower.z;
+  var stockX = (workpiece.upper.x - workpiece.lower.x);
+  var stockY = (workpiece.upper.y - workpiece.lower.y);
+  var stockZ = (workpiece.upper.z - workpiece.lower.z);
 
   writeComment(" ");
   writeComment(" Stock dimension:");
@@ -1289,13 +1243,13 @@ function Firmware3dPrinterLike() {
 }
 Firmware3dPrinterLike.prototype = Object.create(FirmwareBase.prototype);
 Firmware3dPrinterLike.prototype.constructor = Firmware3dPrinterLike;
-Firmware3dPrinterLike.prototype.init = function() {
+Firmware3dPrinterLike.prototype.init = function () {
   gMotionModal = createModal({ force: true }, gFormat); // modal group 1 // G0-G3, ...
   if (properties.jobMarlinEnforceFeedrate) {
     fOutput = createVariable({ force: true }, fFormat);
   }
 };
-Firmware3dPrinterLike.prototype.start = function() {
+Firmware3dPrinterLike.prototype.start = function () {
   writeBlock(gAbsIncModal.format(90)); // Set to Absolute Positioning
   writeBlock(gUnitModal.format(unit == IN ? 20 : 21));
   writeBlock(mFormat.format(84), sFormat.format(0)); // Disable steppers timeout
@@ -1314,17 +1268,17 @@ Firmware3dPrinterLike.prototype.start = function() {
     onCommand(COMMAND_ABL);
   }
 };
-Firmware3dPrinterLike.prototype.end = function() {
+Firmware3dPrinterLike.prototype.end = function () {
   this.display_text("Job end");
 };
-Firmware3dPrinterLike.prototype.close = function() {};
-Firmware3dPrinterLike.prototype.comment = function(text) {
+Firmware3dPrinterLike.prototype.close = function () {};
+Firmware3dPrinterLike.prototype.comment = function (text) {
   writeln(";" + String(text).replace(/[\(\)]/g, ""));
 };
-Firmware3dPrinterLike.prototype.flushMotions = function() {
+Firmware3dPrinterLike.prototype.flushMotions = function () {
   writeBlock(mFormat.format(400));
 };
-Firmware3dPrinterLike.prototype.spindleOn = function(
+Firmware3dPrinterLike.prototype.spindleOn = function (
   _spindleSpeed,
   _clockwise
 ) {
@@ -1363,7 +1317,7 @@ Firmware3dPrinterLike.prototype.spindleOn = function(
   }
   this.spindleEnabled = true;
 };
-Firmware3dPrinterLike.prototype.spindleOff = function() {
+Firmware3dPrinterLike.prototype.spindleOff = function () {
   if (properties.jobManualSpindlePowerControl) {
     writeBlock(mFormat.format(300), sFormat.format(300), pFormat.format(3000));
     this.askUser("Turn OFF spindle", "Spindle", false);
@@ -1381,7 +1335,7 @@ Firmware3dPrinterLike.prototype.spindleOff = function() {
   }
   this.spindleEnabled = false;
 };
-Firmware3dPrinterLike.prototype.laserOn = function(power) {
+Firmware3dPrinterLike.prototype.laserOn = function (power) {
   var laser_pwm = (power / 100) * 255;
 
   if (properties.cutterMarlinMode == 106) {
@@ -1396,7 +1350,7 @@ Firmware3dPrinterLike.prototype.laserOn = function(power) {
     );
   }
 };
-Firmware3dPrinterLike.prototype.laserOff = function() {
+Firmware3dPrinterLike.prototype.laserOff = function () {
   if (properties.cutterMarlinMode == 106) {
     writeBlock(mFormat.format(107));
   } else if (properties.cutterMarlinMode == 3) {
@@ -1409,22 +1363,22 @@ Firmware3dPrinterLike.prototype.laserOff = function() {
     );
   }
 };
-Firmware3dPrinterLike.prototype.coolantA = function(on) {
+Firmware3dPrinterLike.prototype.coolantA = function (on) {
   writeBlock(on ? properties.coolantAMarlinOn : properties.coolantAMarlinOff);
 };
-Firmware3dPrinterLike.prototype.coolantB = function(on) {
+Firmware3dPrinterLike.prototype.coolantB = function (on) {
   writeBlock(on ? properties.coolantBMarlinOn : roperties.coolantBMarlinOff);
 };
-Firmware3dPrinterLike.prototype.dwell = function(seconds) {
+Firmware3dPrinterLike.prototype.dwell = function (seconds) {
   writeBlock(gFormat.format(4), "S" + secFormat.format(seconds));
 };
-Firmware3dPrinterLike.prototype.display_text = function(txt) {
+Firmware3dPrinterLike.prototype.display_text = function (txt) {
   writeBlock(
     mFormat.format(117),
     (properties.jobSeparateWordsWithSpace ? "" : " ") + txt
   );
 };
-Firmware3dPrinterLike.prototype.circular = function(
+Firmware3dPrinterLike.prototype.circular = function (
   clockwise,
   cx,
   cy,
@@ -1474,14 +1428,14 @@ Firmware3dPrinterLike.prototype.circular = function(
   }
 };
 
-Firmware3dPrinterLike.prototype.askUser = function(text, title, allowJog) {
+Firmware3dPrinterLike.prototype.askUser = function (text, title, allowJog) {
   writeBlock(
     mFormat.format(0),
     (properties.jobSeparateWordsWithSpace ? "" : " ") + text
   );
 };
 
-Firmware3dPrinterLike.prototype.toolChange = function() {
+Firmware3dPrinterLike.prototype.toolChange = function () {
   this.flushMotions();
   // Go to tool change position
   onRapid(
@@ -1515,7 +1469,7 @@ Firmware3dPrinterLike.prototype.toolChange = function() {
     onCommand(COMMAND_TOOL_MEASURE);
   }
 };
-Firmware3dPrinterLike.prototype.probeTool = function() {
+Firmware3dPrinterLike.prototype.probeTool = function () {
   this.askUser("Attach ZProbe", "Probe", false);
   // refer http://marlinfw.org/docs/gcode/G038.html
   if (properties.probeUseHomeZ) {
@@ -1540,7 +1494,7 @@ Firmware3dPrinterLike.prototype.probeTool = function() {
   this.askUser("Detach ZProbe", "Probe", false);
 };
 
-Firmware3dPrinterLike.prototype.autoBedLevel = function() {
+Firmware3dPrinterLike.prototype.autoBedLevel = function () {
   this.askUser("Attach ZProbe", "Probe", false);
   // refer http://marlinfw.org/docs/gcode/G029.html
   writeBlock(gFormat.format(28), "Z");
@@ -1585,7 +1539,7 @@ propertyDefinitions3dPrinter = {
   jobMarlinEnforceFeedrate: {
     title: "Job: Enforce Feedrate",
     description: "Add feedrate to each movement g-code",
-    group: job,
+    group: 1,
     type: "boolean",
     default_mm: false,
     default_in: false,
@@ -1593,7 +1547,7 @@ propertyDefinitions3dPrinter = {
   cutterMarlinMode: {
     title: "Laser: Marlin/Reprap mode",
     description: "Marlin/Reprar mode of the laser/plasma cutter",
-    group: laserSpindle,
+    group: 4,
     type: "integer",
     default_mm: 106,
     default_in: 106,
@@ -1606,7 +1560,7 @@ propertyDefinitions3dPrinter = {
   cutterMarlinPin: {
     title: "Laser: Marlin M42 pin",
     description: "Marlin custom pin number for the laser/plasma cutter",
-    group: laserSpindle,
+    group: 4,
     type: "integer",
     default_mm: 4,
     default_in: 4,
@@ -1614,7 +1568,7 @@ propertyDefinitions3dPrinter = {
   spindleMarlinMode: {
     title: "CNC Router: Spindle mode",
     description: "Marlin mode of the CNC Router",
-    group: laserSpindle,
+    group: 4,
     type: "integer",
     default_mm: 106,
     default_in: 106,
@@ -1627,7 +1581,7 @@ propertyDefinitions3dPrinter = {
   spindleMarlinPin: {
     title: "CNC Router: Marlin FAN pin",
     description: "Marlin FAN pin used to control spindle",
-    group: laserSpindle,
+    group: 4,
     type: "integer",
     default_mm: 0,
     default_in: 0,
@@ -1636,14 +1590,14 @@ propertyDefinitions3dPrinter = {
   coolantAMarlinOn: {
     title: "Coolant: A On command",
     description: "GCode command to turn on Coolant channel A",
-    group: coolant,
+    group: 6,
     type: "string",
     default_mm: "M42 P11 S255",
   },
   coolantAMarlinOff: {
     title: "Coolant: A Off command",
     description: "Gcode command to turn off Coolant A",
-    group: coolant,
+    group: 6,
     type: "string",
     default_mm: "M42 P11 S0",
     default_in: "M42 P11 S0",
@@ -1652,7 +1606,7 @@ propertyDefinitions3dPrinter = {
   coolantBMarlinOn: {
     title: "Coolant: B On command",
     description: "GCode command to turn on Coolant channel B",
-    group: coolant,
+    group: 6,
     type: "string",
     default_mm: "M42 P6 S255",
     default_in: "M42 P6 S255",
@@ -1660,7 +1614,7 @@ propertyDefinitions3dPrinter = {
   coolantBMarlinOff: {
     title: "Coolant: B Off command",
     description: "Gcode command to turn off Coolant channel B",
-    group: coolant,
+    group: 6,
     type: "string",
     default_mm: "M42 P6 S0",
     default_in: "M42 P6 S0",
