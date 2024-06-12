@@ -336,14 +336,9 @@ propertyDefinitions = {
     default_mm: 106,
     default_in: 106,
     values: [
-      {
-        title: "M106 P{pin}/M107",
-        id: 106,
-      },
-      {
-        title: "M3 O{PWM}/M5",
-        id: 3,
-      },
+      { title: "M106 P{pin}/M107", id: 106 },
+      { title: "M3 O{PWM}/M5", id: 3 },
+      { title: "M8/M9", id: 8 },
     ],
   },
   spindleMarlinPin: {
@@ -1313,6 +1308,11 @@ Firmware3dPrinterLike.prototype.spindleOn = function (
         mFormat.format(_clockwise ? 3 : 4),
         sOutput.format(_spindleSpeed)
       );
+    } else if (properties.spindleMarlinMode == 8) {
+      writeActivityComment(
+        " >>> Spindle Speed " + speedFormat.format(_spindleSpeed)
+      );
+      writeBlock(mFormat.format(8));
     }
   }
   this.spindleEnabled = true;
@@ -1329,6 +1329,8 @@ Firmware3dPrinterLike.prototype.spindleOff = function () {
       );
     } else if (properties.spindleMarlinMode == 3) {
       writeBlock(mFormat.format(5));
+    } else if (properties.spindleMarlinMode == 8) {
+      writeBlock(mFormat.format(9));
     }
   }
   this.spindleEnabled = false;
