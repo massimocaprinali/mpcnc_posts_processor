@@ -516,8 +516,8 @@ setCodePage("ascii");
 capabilities = CAPABILITY_MILLING | CAPABILITY_JET;
 
 // vendor of MPCNC
-vendor = "guffy1234";
-vendorUrl = "https://github.com/guffy1234/mpcnc_posts_processor";
+vendor = "massimocaprinali";
+vendorUrl = "https://github.com/massimocaprinali/mpcnc_posts_processor.git";
 
 var sequenceNumber;
 
