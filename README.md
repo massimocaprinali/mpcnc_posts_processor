@@ -2,7 +2,7 @@
 DIY CNC Fusion 360 CAM posts processor
 ====
 
-This is modified fork of https://github.com/martindb/mpcnc_posts_processor
+This is modified fork of https://github.com/guffy1234/mpcnc_posts_processor
 
 CAM posts processor for use with Fusion 360 and [MPCNC](https://www.v1engineering.com/assembly/) with RAMPS or any 3-axis DIY CNC.
 Supported firmwares:

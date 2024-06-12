@@ -1575,6 +1575,7 @@ propertyDefinitions3dPrinter = {
     values: [
       { title: "M106 P{pin}/M107", id: 106 },
       { title: "M3 O{PWM}/M5", id: 3 },
+      { title: "M8/M9", id: 8 },
     ],
   },
   spindleMarlinPin: {
